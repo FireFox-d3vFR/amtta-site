@@ -1,0 +1,47 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const SITE_URL = "https://amtta-mions.fr";
+const DEFAULT_TITLE = "AMTTA Mions";
+const DEFAULT_DESCRIPTION =
+  "Site de l'Association Mions Tir a l'Arc : decouvrir le club AMTTA a Mions, les entrainements, inscriptions, activites et concours.";
+
+const {
+  title = DEFAULT_TITLE,
+  description = DEFAULT_DESCRIPTION,
+  canonicalPath = "/",
+  ogImage,
+  noindex = false,
+} = Astro.props;
+
+const buildAbsoluteUrl = (path: string) => {
+  if (path.startsWith("https://") || path.startsWith("http://")) {
+    return path;
+  }
+
+  const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+  return new URL(normalizedPath, SITE_URL).toString();
+};
+
+const resolvedTitle = title.trim() || DEFAULT_TITLE;
+const resolvedDescription = description.trim() || DEFAULT_DESCRIPTION;
+const canonicalUrl = buildAbsoluteUrl(canonicalPath);
+const ogImageUrl = ogImage ? buildAbsoluteUrl(ogImage) : undefined;
+---
+
+<title>{resolvedTitle}</title>
+<meta name="description" content={resolvedDescription} />
+<link rel="canonical" href={canonicalUrl} />
+<meta property="og:title" content={resolvedTitle} />
+<meta property="og:description" content={resolvedDescription} />
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content="AMTTA Mions" />
+{ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+{noindex && <meta name="robots" content="noindex,nofollow" />}

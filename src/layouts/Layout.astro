@@ -2,12 +2,17 @@
 import "../styles/global.css";
 import Header from "../components/site/Header.astro";
 import Footer from "../components/site/Footer.astro";
+import Seo from "../components/site/Seo.astro";
 
 interface Props {
   title?: string;
+  description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  noindex?: boolean;
 }
 
-const { title = "AMTTA Mions" } = Astro.props;
+const { title, description, canonicalPath = Astro.url.pathname, ogImage, noindex = false } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -15,7 +20,13 @@ const { title = "AMTTA Mions" } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
+    <Seo
+      title={title}
+      description={description}
+      canonicalPath={canonicalPath}
+      ogImage={ogImage}
+      noindex={noindex}
+    />
   </head>
 
   <body class="min-h-screen bg-white text-zinc-950 antialiased">
