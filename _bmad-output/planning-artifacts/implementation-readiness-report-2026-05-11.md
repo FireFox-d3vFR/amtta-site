@@ -112,7 +112,7 @@ UX document found and usable.
 
 ### Alignment Findings
 
-- Les routes canoniques courtes `/activites/` et `/concours/` sont alignees entre UX, Architecture et Epics.
+- Les routes canoniques `/vie-sportive/activites/` et `/vie-sportive/concours/` sont alignees entre UX, Architecture et Epics.
 - La rubrique Vie Sportive reste une entree de navigation ou page de synthese, sans imposer les routes longues.
 - Le mobile-first, les tableaux responsives, les photos limitees, le formulaire avec labels et le contact alternatif sont repris dans les stories.
 - Les composants UX principaux sont traduits en stories ou composants : navigation, MobileMenu, PageHero, SeasonSelector, ActivityCard, CompetitionCard, ResultTable, PhotoStrip/PhotoGrid, ArchiveLink, AgendaEmbed, ContactForm.
@@ -176,7 +176,7 @@ Natural dependency order:
 - Vue limite aux interactions necessaires.
 - Tailwind conserve comme systeme de styles.
 - Content collections Astro prevues.
-- Routes saisonnieres directes `/activites/` et `/concours/` respectees.
+- Routes saisonnieres sous Vie Sportive `/vie-sportive/activites/` et `/vie-sportive/concours/` respectees.
 - Pas de backend personnalise.
 - Pas de CMS.
 - Pas d'authentification.
@@ -214,7 +214,7 @@ Aucun issue critique bloquant avant Story 1.1.
 | Inventaire Wix tardif | Medium | Risque de construire des pages avec mauvais contenu ou routes manquantes | Demarrer l'inventaire en parallele de Story 1.1 ou le faire avant Story 1.3 |
 | Choix formulaire non tranche | Low | Story 5.4 peut etre retardee | Choisir Netlify Forms si Netlify est cible, sinon Formspree |
 | Agenda non tranche | Low | Story 5.3 peut rester vague | Choisir iframe Google Calendar ou lien externe avant implementation |
-| Photos et droits de publication non inventories | Medium | Galerie/Activites/Concours peuvent etre retardes | Prepararer une selection initiale de photos et liens Drive |
+| Photos et droits de publication non inventories | Medium | Galerie, Activites et Concours peuvent etre retardes | Prepararer une selection initiale de photos et liens Drive |
 | Story 3.1/4.1 touchent le meme fichier schema | Low | Petite duplication ou churn dans `src/content.config.ts` | Traiter les schemas comme evolutifs, ou fusionner les bases communes pendant Story 3.1 |
 | Pas de `project-context.md` | Low | Les futurs agents auront moins de contexte codebase | Optionnellement lancer `bmad-generate-project-context` avant sprint planning |
 
@@ -243,4 +243,3 @@ Rationale:
 Implementation can start with Story 1.1.
 
 Before starting content-heavy stories, especially Stories 1.3, 2.1, 3.3, 3.4, 4.3 and 4.4, prepare at least minimal source content or fixtures.
-

@@ -41,13 +41,13 @@ Le Lot 1 / MVP exclut volontairement backend personnalise, CMS, authentification
 
 - Pages de presentation : Accueil, Le Club, Qui sommes-nous, Equipe, Vie Sportive, Pratique du Tir a l'Arc, Infos Pratiques, Entrainements, Nous rejoindre, Liens utiles, Contact.
 - Contenus saisonniers : Activites et Concours organises par saison.
-- Routes canoniques directes pour les contenus saisonniers :
-  - `/activites/`
-  - `/activites/[saison]/`
-  - `/activites/[saison]/[activite]/`
-  - `/concours/`
-  - `/concours/[saison]/`
-  - `/concours/[saison]/[concours]/`
+- Routes canoniques des contenus saisonniers sous la section Vie Sportive :
+  - `/vie-sportive/activites/`
+  - `/vie-sportive/activites/[saison]/`
+  - `/vie-sportive/activites/[saison]/[activite]/`
+  - `/vie-sportive/concours/`
+  - `/vie-sportive/concours/[saison]/`
+  - `/vie-sportive/concours/[saison]/[concours]/`
 - Maximum 3 saisons visibles directement.
 - Photos limitees a 5 a 10 images optimisees par activite ou concours.
 - Archives anciennes, galeries completes et medias lourds externalises.
@@ -132,7 +132,7 @@ Le projet est deja initialise avec Astro, Vue et Tailwind. Aucun nouveau starter
 
 - Utiliser la generation statique Astro comme architecture applicative.
 - Utiliser les content collections Astro pour les contenus saisonniers structures.
-- Garder les routes canoniques saisonnieres courtes et directes.
+- Garder les routes canoniques saisonnieres rattachees a la section Vie Sportive.
 - Garder l'hydratation Vue optionnelle et rare.
 - Utiliser des services externes pour le formulaire de contact, l'agenda et les archives lourdes.
 
@@ -255,13 +255,13 @@ Regles de deploiement :
 /le-club/qui-sommes-nous/
 /le-club/equipe/
 /vie-sportive/
-/activites/
-/activites/[saison]/
-/activites/[saison]/[activite]/
-/concours/
-/concours/[saison]/
-/concours/[saison]/[concours]/
-/galerie/
+/vie-sportive/activites/
+/vie-sportive/activites/[saison]/
+/vie-sportive/activites/[saison]/[activite]/
+/vie-sportive/concours/
+/vie-sportive/concours/[saison]/
+/vie-sportive/concours/[saison]/[concours]/
+/vie-sportive/galerie/
 /pratique-du-tir-a-l-arc/
 /infos-pratiques/
 /infos-pratiques/entrainements/
@@ -279,18 +279,19 @@ src/pages/
     index.astro
     qui-sommes-nous.astro
     equipe.astro
-  vie-sportive.astro
-  activites/
+  vie-sportive/
     index.astro
-    [saison]/
+    activites/
       index.astro
-      [activite].astro
-  concours/
-    index.astro
-    [saison]/
+      [saison]/
+        index.astro
+        [activite].astro
+    concours/
       index.astro
-      [concours].astro
-  galerie.astro
+      [saison]/
+        index.astro
+        [concours].astro
+    galerie.astro
   pratique-du-tir-a-l-arc.astro
   infos-pratiques/
     index.astro
@@ -304,10 +305,10 @@ src/pages/
 
 Utiliser `getStaticPaths()` pour :
 
-- `/activites/[saison]/`
-- `/activites/[saison]/[activite]/`
-- `/concours/[saison]/`
-- `/concours/[saison]/[concours]/`
+- `/vie-sportive/activites/[saison]/`
+- `/vie-sportive/activites/[saison]/[activite]/`
+- `/vie-sportive/concours/[saison]/`
+- `/vie-sportive/concours/[saison]/[concours]/`
 
 Regles de generation :
 
@@ -588,7 +589,7 @@ Regles :
 
 - Chaque page a un titre et une description uniques.
 - Les pages detail saisonnieres incluent la saison et le titre du contenu.
-- Les URLs canoniques utilisent les routes directes pour Activites et Concours.
+- Les URLs canoniques des contenus saisonniers utilisent les routes sous `/vie-sportive/`.
 - Les termes de recherche locale sont integres naturellement dans les contenus, sans bourrage de mots-cles.
 
 ### Sitemap et Robots
@@ -789,18 +790,19 @@ amtta-site/
         index.astro
         qui-sommes-nous.astro
         equipe.astro
-      vie-sportive.astro
-      activites/
+      vie-sportive/
         index.astro
-        [saison]/
+        activites/
           index.astro
-          [activite].astro
-      concours/
-        index.astro
-        [saison]/
+          [saison]/
+            index.astro
+            [activite].astro
+        concours/
           index.astro
-          [concours].astro
-      galerie.astro
+          [saison]/
+            index.astro
+            [concours].astro
+        galerie.astro
       pratique-du-tir-a-l-arc.astro
       infos-pratiques/
         index.astro
@@ -834,8 +836,8 @@ Aucun composant ne doit lire directement des fichiers depuis le disque. Aucune p
 | --- | --- |
 | Pages editoriales | `src/pages`, `src/layouts`, `src/components/ui` |
 | Navigation proche Wix | `src/components/site/Navigation.astro`, `src/lib/content/navigation.ts` |
-| Activites par saison | `src/content/activities`, `src/pages/activites`, `src/lib/content/activities.ts` |
-| Concours par saison | `src/content/competitions`, `src/pages/concours`, `src/lib/content/competitions.ts` |
+| Activites par saison | `src/content/activities`, `src/pages/vie-sportive/activites`, `src/lib/content/activities.ts` |
+| Concours par saison | `src/content/competitions`, `src/pages/vie-sportive/concours`, `src/lib/content/competitions.ts` |
 | 3 saisons visibles | `src/content/seasons`, `src/lib/content/seasons.ts` |
 | Photos limitees | schemas content + `PhotoStrip.astro`, `PhotoGrid.astro` |
 | Archives externes | `ArchiveLink.astro`, fields `archiveUrl` |
@@ -880,7 +882,7 @@ Les decisions sont coherentes avec le PRD et l'UX :
 - Astro statique couvre le besoin MPA.
 - Content collections couvrent la maintenance Markdown/JSON.
 - Vue limite aux interactions respecte la performance.
-- Routes directes Activites/Concours respectent la specification UX.
+- Routes Activites/Concours sous Vie Sportive respectent la specification UX.
 - L'externalisation media evite le gonflement du depot.
 - Netlify/Vercel restent compatibles avec l'objectif deploiement statique.
 
@@ -949,7 +951,7 @@ Ecarts mineurs a trancher pendant l'implementation :
 
 Les agents IA qui implementent le MVP doivent :
 
-- respecter exactement les routes saisonnieres directes ;
+- respecter exactement les routes saisonnieres sous `/vie-sportive/` ;
 - garder le site statique sauf changement explicite dans une future story ;
 - utiliser Astro en premier, Vue seulement pour un vrai etat cote client ;
 - garder les contenus dans les collections et helpers, pas hard-codes dans les pages ;

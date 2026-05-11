@@ -18,13 +18,20 @@ const { title = "AMTTA Mions" } = Astro.props;
     <title>{title}</title>
   </head>
 
-  <body class="bg-white text-black dark:bg-zinc-900 dark:text-white">
-	<Header />
-	
-	<main>
-		<slot />
-	</main>
+  <body class="min-h-screen bg-white text-zinc-950 antialiased">
+    <a
+      href="#contenu-principal"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-green-800 focus:shadow"
+    >
+      Aller au contenu principal
+    </a>
 
-	<Footer />
+    <Header />
+
+    <main id="contenu-principal">
+      <slot />
+    </main>
+
+    <Footer />
   </body>
 </html>

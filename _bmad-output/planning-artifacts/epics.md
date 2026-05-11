@@ -17,7 +17,7 @@ status: complete
 
 ## Overview
 
-Ce document decompose le Lot 1 / MVP de `amtta-site` en epics et stories d'implementation concretes. Le decoupage suit le PRD, la specification UX et l'architecture technique validee : site statique Astro, Vue limite aux composants interactifs necessaires, Tailwind pour le design, content collections Astro, routes saisonnieres directes `/activites/` et `/concours/`, pas de backend, pas de CMS, pas d'authentification, pas de base de donnees.
+Ce document decompose le Lot 1 / MVP de `amtta-site` en epics et stories d'implementation concretes. Le decoupage suit le PRD, la specification UX et l'architecture technique validee : site statique Astro, Vue limite aux composants interactifs necessaires, Tailwind pour le design, content collections Astro, routes saisonnieres sous la section Vie Sportive (`/vie-sportive/activites/` et `/vie-sportive/concours/`), pas de backend, pas de CMS, pas d'authentification, pas de base de donnees.
 
 Le decoupage est pense pour un projet solo et une implementation progressive. Chaque epic livre une valeur utilisateur exploitable, et chaque story doit pouvoir etre implementee par un seul agent/dev sans dependance vers une story future.
 
@@ -120,7 +120,7 @@ NFR36: La mise en production doit inclure une verification du formulaire, des li
 
 - Continuer sur le socle Astro 6 + Vue 3 + Tailwind 4 existant ; ne pas introduire de nouveau starter.
 - Creer `src/content.config.ts` avec schemas Zod pour les content collections.
-- Utiliser les routes directes `/activites/` et `/concours/` comme routes canoniques.
+- Utiliser les routes `/vie-sportive/activites/` et `/vie-sportive/concours/` comme routes canoniques.
 - Utiliser `getStaticPaths()` pour generer les pages saison et detail.
 - Centraliser les helpers de contenu dans `src/lib/content/`.
 - Limiter les saisons publiques a 3 via donnees et validation.
@@ -133,7 +133,7 @@ NFR36: La mise en production doit inclure une verification du formulaire, des li
 
 ### UX Design Requirements
 
-UX-DR1: La navigation principale doit rester proche des reperes Wix tout en utilisant les routes canoniques courtes pour Activites et Concours.  
+UX-DR1: La navigation principale doit rester proche des reperes Wix tout en rattachant Activites et Concours a la section Vie Sportive.  
 UX-DR2: L'accueil doit orienter rapidement vers Entrainements, Nous rejoindre, Contact, Vie Sportive, Activites et Concours.  
 UX-DR3: Les pages Activites et Concours doivent proposer un choix clair des 3 saisons visibles.  
 UX-DR4: Les details d'activite doivent afficher titre, date, saison, resume, photos limitees et archive externe si necessaire.  
@@ -229,7 +229,7 @@ So that je puisse retrouver les rubriques principales du site.
 **Given** les rubriques MVP definies  
 **When** un visiteur consulte une page desktop  
 **Then** le header affiche Accueil, Le Club, Vie Sportive, Pratique & Infos et Contact  
-**And** les liens Activites et Concours utilisent les routes directes `/activites/` et `/concours/`.
+**And** les liens Activites et Concours utilisent les routes canoniques `/vie-sportive/activites/` et `/vie-sportive/concours/`.
 
 **Given** un petit ecran mobile  
 **When** le visiteur ouvre le menu mobile  
@@ -374,7 +374,7 @@ So that les pages ne dupliquent pas la logique metier.
 **Then** les helpers retournent les donnees triees et filtrees  
 **And** les brouillons sont exclus en production.
 
-### Story 3.3: Creer les pages `/activites/` et `/activites/[saison]/`
+### Story 3.3: Creer les pages `/vie-sportive/activites/` et `/vie-sportive/activites/[saison]/`
 
 As a membre ou visiteur,
 I want consulter les activites par saison,
@@ -383,16 +383,16 @@ So that je retrouve rapidement la vie associative recente du club.
 **Acceptance Criteria:**
 
 **Given** des saisons et activites de test  
-**When** le visiteur consulte `/activites/`  
+**When** le visiteur consulte `/vie-sportive/activites/`  
 **Then** il voit les 3 saisons visibles maximum et un acces clair a chaque saison  
-**And** la route canonique est `/activites/`, sans prefixe `/vie-sportive/`.
+**And** la route canonique est `/vie-sportive/activites/`.
 
 **Given** une saison visible  
-**When** le visiteur consulte `/activites/[saison]/`  
+**When** le visiteur consulte `/vie-sportive/activites/[saison]/`  
 **Then** il voit la liste des activites de cette saison sous forme de cartes lisibles  
 **And** chaque carte pointe vers le detail de l'activite.
 
-### Story 3.4: Creer la page detail `/activites/[saison]/[activite]/`
+### Story 3.4: Creer la page detail `/vie-sportive/activites/[saison]/[activite]/`
 
 As a membre AMTTA,
 I want consulter le detail d'une activite,
@@ -440,7 +440,7 @@ So that les pages Concours restent simples.
 **Then** le helper retourne les concours publies, tries et associes a la bonne saison  
 **And** les brouillons sont exclus en production.
 
-### Story 4.3: Creer les pages `/concours/` et `/concours/[saison]/`
+### Story 4.3: Creer les pages `/vie-sportive/concours/` et `/vie-sportive/concours/[saison]/`
 
 As a membre ou participant,
 I want consulter les concours par saison,
@@ -449,15 +449,15 @@ So that je retrouve rapidement une competition recente.
 **Acceptance Criteria:**
 
 **Given** des concours de test  
-**When** le visiteur consulte `/concours/`  
+**When** le visiteur consulte `/vie-sportive/concours/`  
 **Then** il voit les 3 saisons visibles maximum et un acces clair aux concours par saison  
-**And** la route canonique est `/concours/`, sans prefixe `/vie-sportive/`.
+**And** la route canonique est `/vie-sportive/concours/`.
 
 **Given** une saison visible  
-**When** le visiteur consulte `/concours/[saison]/`  
+**When** le visiteur consulte `/vie-sportive/concours/[saison]/`  
 **Then** il voit les concours de la saison avec date, lieu, resume et lien detail.
 
-### Story 4.4: Creer la page detail `/concours/[saison]/[concours]/`
+### Story 4.4: Creer la page detail `/vie-sportive/concours/[saison]/[concours]/`
 
 As a adherent ou visiteur de concours,
 I want consulter le detail d'un concours,
@@ -513,7 +513,7 @@ So that je voie l'ambiance sans charger une archive complete.
 
 **Acceptance Criteria:**
 
-**Given** la route `/galerie/`  
+**Given** la route `/vie-sportive/galerie/`  
 **When** un visiteur consulte la page  
 **Then** il voit une selection limitee de photos optimisees  
 **And** les albums complets ou anciens sont renvoyes vers une archive externe si necessaire.
@@ -607,7 +607,7 @@ So that la migration ne casse pas les usages importants.
 **Given** `docs/migration/redirects.md` ou une configuration d'hebergeur  
 **When** une ancienne URL importante a un equivalent  
 **Then** une redirection cible est documentee ou configuree  
-**And** les routes Activites et Concours pointent vers les nouvelles routes courtes.
+**And** les routes Activites et Concours pointent vers les routes sous `/vie-sportive/`.
 
 ### Story 6.4: Valider le responsive, l'accessibilite pragmatique et la performance
 
@@ -675,7 +675,7 @@ So that les parcours principaux soient verifies avant mise en ligne.
 - Vue est limite au menu mobile ou a une interaction justifiee.
 - Les content collections sont introduites au moment ou elles servent les contenus saisonniers.
 - Aucune story n'introduit backend, CMS, authentification, base de donnees ou espace membre.
-- Les routes saisonnieres canoniques sont `/activites/` et `/concours/`.
+- Les routes saisonnieres canoniques sont `/vie-sportive/activites/` et `/vie-sportive/concours/`.
 - Les archives lourdes sont externalisees.
 
 ### Story Readiness Validation
@@ -684,4 +684,3 @@ So that les parcours principaux soient verifies avant mise en ligne.
 - Les stories sont sequentielles et ne dependent pas de stories futures.
 - Les stories restent adaptees a une implementation progressive solo.
 - Les criteres d'acceptation sont testables et alignes avec PRD, UX et Architecture.
-

@@ -1,6 +1,29 @@
-<!-- Footer.astro -->
-<footer class="mt-16 bg-green-700 text-white">
-  <div class="mx-auto max-w-6xl px-4 py-8 text-center text-sm">
-    © AMTTA - Association Mions Tir à l’Arc
+---
+import { footerNavigation } from "../../lib/content/navigation";
+---
+
+<footer class="mt-16 bg-green-950 text-white">
+  <div class="mx-auto grid max-w-6xl gap-6 px-4 py-8 text-sm md:grid-cols-[1fr_auto] md:items-center">
+    <div>
+      <p class="font-semibold">AMTTA</p>
+      <p class="mt-1 text-white/80">&copy; AMTTA - Association Mions Tir a l'Arc</p>
+    </div>
+
+    <nav aria-label="Navigation secondaire">
+      <ul class="flex flex-wrap gap-x-4 gap-y-2 md:justify-end">
+        {
+          footerNavigation.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                class="rounded text-white/85 underline-offset-4 outline-none hover:text-white hover:underline focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-green-950"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
   </div>
 </footer>

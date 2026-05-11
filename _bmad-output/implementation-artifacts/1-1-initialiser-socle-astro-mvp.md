@@ -51,7 +51,7 @@ Cette story est la premiere story d'implementation. Elle ne doit pas construire 
    **Given** les documents PRD, UX, Architecture et Readiness  
    **When** la story est implementee  
    **Then** le projet reste aligne avec Astro statique, Vue opt-in et Tailwind  
-   **And** aucune route longue `/vie-sportive/activites` ou `/vie-sportive/concours-ffta` n'est creee.
+   **And** aucune route saisonniere ou page metier n'est creee.
 
 ## Tasks / Subtasks
 
@@ -112,7 +112,7 @@ Cette story est la premiere story d'implementation. Elle ne doit pas construire 
 
 ### A ne pas creer dans cette story
 
-- Pages metier completes : `/le-club/`, `/activites/`, `/concours/`, `/contact/`, etc.
+- Pages metier completes : `/le-club/`, `/vie-sportive/activites/`, `/vie-sportive/concours/`, `/contact/`, etc.
 - Schemas complets `seasons`, `activities`, `competitions`.
 - Formulaire Netlify/Formspree.
 - Agenda Google.
@@ -151,7 +151,7 @@ Cette story est la premiere story d'implementation. Elle ne doit pas construire 
 - Vue reste disponible uniquement pour les composants interactifs necessaires, typiquement le futur menu mobile.
 - Tailwind 4 doit rester configure via `@tailwindcss/vite`; ne pas ajouter `tailwind.config.js` ou PostCSS sauf besoin prouve.
 - Les content collections Astro seront implementees plus tard. Story 1.1 peut preparer `src/content/`, mais ne doit pas definir les schemas metier complets.
-- Ne pas creer de routes `/vie-sportive/activites` ou `/vie-sportive/concours-ffta`.
+- Ne pas creer de routes saisonnieres ou pages metier dans cette story.
 - Ne pas ajouter d'API interne.
 
 ### References

@@ -1,0 +1,42 @@
+---
+import type { NavigationItem } from "../../lib/content/navigation";
+
+interface Props {
+  items: NavigationItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="hidden lg:block" aria-label="Navigation principale">
+  <ul class="flex items-center gap-1">
+    {
+      items.map((item) => (
+        <li class="group relative">
+          <a
+            href={item.href}
+            class="block rounded px-3 py-2 text-sm font-medium text-white outline-none transition hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-green-800"
+            aria-haspopup={item.children ? "true" : undefined}
+          >
+            {item.label}
+          </a>
+
+          {item.children && (
+            <ul class="absolute left-0 top-full hidden min-w-56 rounded-b bg-white py-2 text-green-950 shadow-lg ring-1 ring-black/10 group-hover:block group-focus-within:block">
+              {item.children.map((child) => (
+                <li>
+                  <a
+                    href={child.href}
+                    class="block px-4 py-2 text-sm outline-none transition hover:bg-green-50 focus-visible:bg-green-50 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-green-700"
+                  >
+                    {child.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</nav>

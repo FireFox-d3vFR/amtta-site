@@ -133,7 +133,7 @@ La navigation MVP recommande 5 entrees principales, proches de la logique du PRD
 | Pratique & Infos | Repondre aux besoins pratiques | Pratique du Tir a l'Arc, Entrainements, Nous rejoindre, Infos Pratiques, Liens utiles |
 | Contact | Permettre la prise de contact | Contact |
 
-Sur desktop, les sous-pages peuvent etre exposees dans des menus deroulants simples ou une navigation secondaire par section. Sur mobile, l'entree principale doit rester courte et les sous-pages doivent etre visibles dans un panneau de navigation vertical. La rubrique Vie Sportive peut rester une entree de navigation ou une page de synthese, mais les routes canoniques des contenus saisonniers Activites et Concours restent directes pour garder des URLs courtes, lisibles et maintenables.
+Sur desktop, les sous-pages peuvent etre exposees dans des menus deroulants simples ou une navigation secondaire par section. Sur mobile, l'entree principale doit rester courte et les sous-pages doivent etre visibles dans un panneau de navigation vertical. La rubrique Vie Sportive devient la section parente des contenus saisonniers : Activites, Concours et Galerie utilisent des URLs canoniques sous `/vie-sportive/` afin de rester coherentes avec la navigation principale.
 
 ### Arborescence MVP
 
@@ -143,13 +143,13 @@ Sur desktop, les sous-pages peuvent etre exposees dans des menus deroulants simp
 /le-club/qui-sommes-nous/
 /le-club/equipe/
 /vie-sportive/
-/activites/
-/activites/[saison]/
-/activites/[saison]/[activite]/
-/concours/
-/concours/[saison]/
-/concours/[saison]/[concours]/
-/galerie/
+/vie-sportive/activites/
+/vie-sportive/activites/[saison]/
+/vie-sportive/activites/[saison]/[activite]/
+/vie-sportive/concours/
+/vie-sportive/concours/[saison]/
+/vie-sportive/concours/[saison]/[concours]/
+/vie-sportive/galerie/
 /pratique-du-tir-a-l-arc/
 /infos-pratiques/
 /infos-pratiques/entrainements/
@@ -163,7 +163,7 @@ Sur desktop, les sous-pages peuvent etre exposees dans des menus deroulants simp
 - La navigation principale reste stable sur toutes les pages.
 - Le bouton ou lien Contact reste facilement accessible, idealement visible dans l'en-tete desktop et le menu mobile.
 - Les pages saisonnieres affichent toujours un retour vers la liste de saison et la rubrique parente.
-- Les routes canoniques des pages Activites et Concours sont directes, meme si elles sont accessibles depuis la rubrique Vie Sportive.
+- Les routes canoniques des pages Activites, Concours et Galerie sont rattachees a la section Vie Sportive.
 - Les contenus plus anciens que les 3 saisons visibles ne doivent pas encombrer la navigation principale.
 - Les liens externes vers archives ou agenda doivent etre clairement distingues des pages internes.
 
